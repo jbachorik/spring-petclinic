@@ -37,7 +37,7 @@ the JMeter in headless mode and convert the JMeter native JTL files into CSV agg
 Typically, the system will be initialized by running `sh init_deb.sh` or, if targeting a different system,
 a corresponding sequence of commands to download and install the listed dependencies.
 
-Once the system is set up the benchmarking can be started as `sh driver.sh 0.1,0.2,0.5,0.8 1,5,10,100,200,500` - 
+Once the system is set up the benchmarking can be started as `bash driver.sh 0.1,0.2,0.5,0.8 1,5,10,100,200,500` - 
 the first comma separated list is the list of span sampling rates. The second comma separated list is the list
 of stack sampling periods. These two lists are required.
 
