@@ -33,7 +33,8 @@ if [ -z "$JMETER_HOME" ]; then
 fi
 
 if [ -z "$PETCLINIC_JAR" ]; then
-  PETCLINIC_JAR="../../target/"
+  PETCLINIC_JAR="../../target/spring-petclinic-2.2.0.BUILD-SNAPSHOT.jar"
+fi
 
 IFS=',' read -r -a SAMPLE_RATES <<< "$1"
 IFS=',' read -r -a SAMPLE_PERIODS <<< "$2"
