@@ -23,6 +23,11 @@ parameterized in regard of the target server.
 ### Driver Script
 * A shell [script](driver.sh) to start up the Petclinic Spring app with required parameters, start
 the JMeter in headless mode and convert the JMeter native JTL files into CSV aggregations.
+* The default setting can be modified by using the following env variables
+   * JAVA_HOME - use this particular Java installation
+   * AGENT_HOME - the location to search for `dd-java-agent.jar` file
+   * JMETER_HOME - custom JMeter installation location
+   * PETCLINIC_JAR - custom binary of the Petclinic Spring application
 
 ### Helper Scripts
 * [init_deb.sh](init_deb.sh) - a convenience script to download and install all required dependencies on a Debian-like OS
