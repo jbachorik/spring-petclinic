@@ -5,8 +5,8 @@ pip install python-jtl
 pip install numpy
 
 mkdir -p .bin
-if [ ! -d .bin/apache-jmeter-5.3 ]; then
-  (cd .bin && wget https://downloads.apache.org//jmeter/binaries/apache-jmeter-5.3.tgz && tar xvzf apache-jmeter-5.3.tgz && rm -f apache-jmeter-5.3.tgz)
+if [ ! -d ".bin/apache-jmeter-5.3" ]; then
+  (cd .bin && wget https://downloads.apache.org/jmeter/binaries/apache-jmeter-5.3.tgz && tar xvzf apache-jmeter-5.3.tgz && rm -f apache-jmeter-5.3.tgz)
 fi
 
 curl -s "https://get.sdkman.io" | bash
