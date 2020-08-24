@@ -13,9 +13,11 @@ function ctrl_c {
 }
 
 if [ "$#" -lt 2 ] && [ "$#" -gt 3 ]; then
-  echo "Usage: latency_bench.sh span_sample_rate_list stack_sampling_period_list [output_dir]"
+  echo "Usage: driver.sh span_sample_rate_list stack_sampling_period_list [output_dir]"
   exit 2
 fi
+
+mkdir -p ".bin"
 
 if [ -z "$JAVA_HOME" ]; then
   JAVA_CMD="java"
@@ -24,11 +26,11 @@ else
 fi
 
 if [ -z "$AGENT_HOME" ]; then
-  AGENT_HOME="../.."
+  AGENT_HOME="./.bin"
 fi
 
 if [ -z "$JMETER_HOME" ]; then
-  JMETER_HOME=/opt/apache-jmeter-5.3
+  JMETER_HOME="./.bin/apache-jmeter-5.3"
 fi
 
 IFS=',' read -r -a SAMPLE_RATES <<< "$1"
@@ -36,7 +38,7 @@ IFS=',' read -r -a SAMPLE_PERIODS <<< "$2"
 
 OUTPUT_DIR=$3
 if [ -z "$OUTPUT_DIR" ]; then
-  OUTPUT_DIR="/tmp"
+  OUTPUT_DIR=".reports"
 fi
 
 if [ ! -e "$OUTPUT_DIR" ]; then
@@ -47,7 +49,7 @@ fi
 # Once the app is up and running JMeter will be used to generate load simulating user interaction.
 # The metrics are captured in a JTL file which is then processed such that aggregates (min, max, avg, percentiles)
 # per request and exported to CSV file.
-# The script takes comma-delimited list of span sample rates as its first argumet, comma-delimited list of stack
+# The script takes comma-delimited list of span sample rates as its first argument, comma-delimited list of stack
 # sampler periods as the second argument and an optional third argument specifying the output directory.
 
 for SAMPLE_RATE in "${SAMPLE_RATES[@]}"; do
