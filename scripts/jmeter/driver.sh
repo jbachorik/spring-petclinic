@@ -62,7 +62,7 @@ for SAMPLE_RATE in "${SAMPLE_RATES[@]}"; do
 
     echo "==== Span Sample Rate: ${SAMPLE_RATE}, Stack Sampling Period: ${SAMPLE_PERIOD}, Output File: $OUTPUT_FILE, CSV File: $OUTPUT_CSV_FILE"
     rm -f $OUTPUT_FILE
-    $JAVA_CMD -javaagent:${AGENT_HOME}/dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.trace.enabled=true -Ddd.method.trace.enabled=true -Ddd.method.trace.sample.rate=${SAMPLE_RATE} -DnbThreads=200 -Dmlt.sampler.ms=${SAMPLE_PERIOD} -jar ../target/spring-petclinic-2.2.0.BUILD-SNAPSHOT.jar &
+    $JAVA_CMD -javaagent:${AGENT_HOME}/dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.trace.enabled=true -Ddd.method.trace.enabled=true -Ddd.method.trace.sample.rate=${SAMPLE_RATE} -DnbThreads=200 -Dmlt.sampler.ms=${SAMPLE_PERIOD} -jar $PETCLINIC_JAR &
     CMD_PID=$!
     echo "=> Waiting for Spring petclinic"
     while [ true ]; do
