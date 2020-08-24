@@ -32,6 +32,9 @@ if [ -z "$JMETER_HOME" ]; then
   JMETER_HOME="./.bin/apache-jmeter-5.3"
 fi
 
+if [ -z "$PETCLINIC_JAR" ]; then
+  PETCLINIC_JAR="../../target/"
+
 IFS=',' read -r -a SAMPLE_RATES <<< "$1"
 IFS=',' read -r -a SAMPLE_PERIODS <<< "$2"
 
