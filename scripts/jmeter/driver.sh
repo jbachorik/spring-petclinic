@@ -1,9 +1,8 @@
-#~/bin/bash
+#!/bin/bash
 set +e
 
 # trap ctrl-c and call ctrl_c()
 trap ctrl_c INT
-
 
 function ctrl_c {
   if [ ! -z "$CMD_PID" ]; then
