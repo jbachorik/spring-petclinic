@@ -15,7 +15,7 @@ This folder contains JMeter based load generation and aggregation scripts.
 ## Structure
 ### JMeter Test Plan
 * The JMeter load generator is driven by [pet_clinic.jmx](pet_clinic.jmx) test plan which is 
-paremeterized in regard of the target server. 
+parameterized in regard of the target server. 
 * The test plan goes over a number of requests a regular user would make and executes them in random order as quickly as possible.
 * Currently, the number of distinct requests is hard-coded but it is possible to make it completely dynamic based on the available data. 
 * The test plan simulates 2 concurrent users.
