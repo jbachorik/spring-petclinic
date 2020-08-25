@@ -57,12 +57,15 @@ fi
 
 for SAMPLE_RATE in "${SAMPLE_RATES[@]}"; do
   for SAMPLE_PERIOD in "${SAMPLE_PERIODS[@]}"; do
-    OUTPUT_FILE=$OUTPUT_DIR/mlt_${SAMPLE_PERIOD}ms_$(echo print ${SAMPLE_RATE}*100 | perl).jtl
-    OUTPUT_CSV_FILE=$OUTPUT_DIR/mlt_${SAMPLE_PERIOD}ms_$(echo print ${SAMPLE_RATE}*100 | perl).csv
+    RATE_PERCENT=$(echo print ${SAMPLE_RATE}*100 | perl)
+    OUTPUT_BASE=$OUTPUT_DIR/mlt_${SAMPLE_PERIOD}ms_$RATE_PERCENT
+    OUTPUT_FILE=${OUTPUT_BASE}.jtl
+    OUTPUT_CSV_FILE=${OUTPUT_BASE}.csv
+    OUTPUT_LOG_FILE=${OUTPUT_BASE}.out
 
-    echo "==== Span Sample Rate: ${SAMPLE_RATE}, Stack Sampling Period: ${SAMPLE_PERIOD}, Output File: $OUTPUT_FILE, CSV File: $OUTPUT_CSV_FILE"
+    echo "==== Span Sample Rate: ${SAMPLE_RATE}, Stack Sampling Period: ${SAMPLE_PERIOD}, Report File: $OUTPUT_FILE, CSV File: $OUTPUT_CSV_FILE, Log Output File: $OUTPUT_LOG_FILE}"
     rm -f $OUTPUT_FILE
-    $JAVA_CMD -javaagent:${AGENT_HOME}/dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.trace.enabled=true -Ddd.method.trace.enabled=true -Ddd.method.trace.sample.rate=${SAMPLE_RATE} -DnbThreads=200 -Dmlt.sampler.ms=${SAMPLE_PERIOD} -jar $PETCLINIC_JAR &
+    $JAVA_CMD -javaagent:${AGENT_HOME}/dd-java-agent.jar -Ddd.profiling.enabled=true -Ddd.trace.enabled=true -Ddd.method.trace.enabled=true -Ddd.method.trace.sample.rate=${SAMPLE_RATE} -DnbThreads=200 -Dmlt.sampler.ms=${SAMPLE_PERIOD} -jar $PETCLINIC_JAR | tee ${OUTPUT_LOG_FILE} &
     CMD_PID=$!
     echo "=> Waiting for Spring petclinic"
     while [ true ]; do
